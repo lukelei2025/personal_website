@@ -615,7 +615,8 @@ h3 {
     background-color: #fff;
     margin: auto;
     width: 95%;
-    max-width: 1000px;
+    max-width: 800px;
+    /* Reduced from 1000px */
     position: relative;
     border-radius: 24px;
     overflow: hidden;
@@ -653,7 +654,8 @@ h3 {
 
 .modal-image-wrapper {
     width: 100%;
-    height: 400px;
+    height: 300px;
+    /* Reduced from 400px */
     overflow: hidden;
     background: #f0f0f0;
 }
@@ -665,19 +667,24 @@ h3 {
 }
 
 .modal-text {
-    padding: 2.5rem;
+    padding: 2rem;
+    /* Reduced from 2.5rem */
     text-align: center;
 }
 
 .modal-text h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    /* Reduced from 2rem */
+    margin-bottom: 0.5rem;
+    /* Reduced from 1rem */
 }
 
 .modal-text p {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    /* Reduced from 1.1rem */
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
     line-height: 1.6;
     white-space: pre-wrap;
     text-align: left;
