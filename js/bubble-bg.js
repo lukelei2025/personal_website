@@ -26,17 +26,9 @@ class BubbleBackground {
         this.container.appendChild(this.canvas);
 
         this.bubbles = [];
-        this.bubbleCount = 50; // Number of bubbles
+        this.bubbleCount = 15; // Reduced count for larger bubbles
         this.mouse = { x: null, y: null };
         this.clickPulse = { x: null, y: null, force: 0, active: false };
-
-        // Vibrant colors (Blue, Purple, Red, Orange) with transparency
-        this.colors = [
-            'rgba(0, 122, 255, 0.6)',   // Blue
-            'rgba(88, 86, 214, 0.6)',   // Purple
-            'rgba(255, 36, 66, 0.6)',   // Red (XHS)
-            'rgba(255, 149, 0, 0.6)'    // Orange
-        ];
 
         this.init();
         this.animate();
@@ -56,10 +48,10 @@ class BubbleBackground {
     createBubbles() {
         this.bubbles = [];
         // Adjust bubble count based on screen size
-        const count = window.innerWidth < 768 ? 30 : 60;
+        const count = window.innerWidth < 768 ? 8 : 15;
 
         for (let i = 0; i < count; i++) {
-            this.bubbles.push(new Bubble(this.canvas, this.colors));
+            this.bubbles.push(new Bubble(this.canvas));
         }
     }
 
@@ -107,27 +99,53 @@ class BubbleBackground {
 }
 
 class Bubble {
-    constructor(canvas, colors) {
+    constructor(canvas) {
         this.canvas = canvas;
-        this.radius = Math.random() * 20 + 10; // Radius 10-30
+        // Much larger bubbles: 40px - 120px radius
+        this.radius = Math.random() * 80 + 40;
         this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
         this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
-        this.dx = (Math.random() - 0.5) * 1; // Slow horizontal drift
-        this.dy = (Math.random() - 0.5) * 1; // Slow vertical drift
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.dx = (Math.random() - 0.5) * 1.5; // Slightly faster drift for large bubbles
+        this.dy = (Math.random() - 0.5) * 1.5;
         this.originalRadius = this.radius;
     }
 
     draw(ctx) {
+        // Bubble Body (Transparent Glass)
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'; // Very faint fill
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'; // Thin white rim
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Main Reflection (Top Left) - "Light" effect
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.beginPath();
+        // Elliptical reflection for realism
+        ctx.ellipse(
+            this.x - this.radius * 0.4,
+            this.y - this.radius * 0.4,
+            this.radius * 0.2,
+            this.radius * 0.1,
+            Math.PI / 4,
+            0,
+            Math.PI * 2
+        );
         ctx.fill();
 
-        // Add a shine effect
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        // Secondary Reflection (Bottom Right) - Subtle
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.beginPath();
-        ctx.arc(this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.2, 0, Math.PI * 2, false);
+        ctx.arc(
+            this.x + this.radius * 0.4,
+            this.y + this.radius * 0.4,
+            this.radius * 0.05,
+            0,
+            Math.PI * 2,
+            false
+        );
         ctx.fill();
     }
 
