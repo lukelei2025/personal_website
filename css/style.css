@@ -683,25 +683,12 @@ h3 {
 .modal-text p {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    margin-bottom: 0.8rem;
-    /* Reduced from 1.5rem */
+    margin-bottom: 0.6rem;
     line-height: 1.6;
-    white-space: pre-wrap;
     text-align: left;
 }
 
-.modal-text ul {
-    text-align: left;
-    margin: 0.5rem 0 0.8rem 0;
-    padding-left: 1.2rem;
-}
 
-.modal-text li {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.2rem;
-    line-height: 1.5;
-}
 
 /* Fun Button */
 .fun-btn {
@@ -743,23 +730,31 @@ h3 {
     .modal-image-wrapper {
         width: 50%;
         height: auto;
-        min-height: 350px;
-        /* Taller for split layout */
-        position: relative;
+        /* Allow growing with image */
+        /* min-height removed to allow natural height */
     }
 
     .modal-image-wrapper img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
+        position: static;
+        /* Remove absolute positioning */
+        height: auto;
         width: 100%;
+        object-fit: contain;
+        /* Show full image */
     }
 
     .modal-text {
         width: 50%;
         text-align: left;
         padding-top: 2rem;
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal-text .fun-btn {
+        margin-top: auto;
+        margin-bottom: 1rem;
+        /* Add some bottom spacing */
     }
 }
