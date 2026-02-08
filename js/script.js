@@ -37,17 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const projectDetails = {
-        "coffee": `豆藏（Project Coffee）是一款专为咖啡爱好者打造的个人咖啡豆管理应用，旨在解决“喝过即忘”的痛点。它能帮你将买过、喝过、喜欢过的豆子集中存档，随时回溯口味与评分。<br><br>
-        
-<strong>核心体验</strong>
-<ul style="text-align: left; padding-left: 1.2rem; margin: 0.5rem 0 1rem 0;">
-    <li style="margin-bottom: 0.3rem;"><strong>AI 智能识别</strong>：拍照上传豆卡或包装，AI自动提取产地、处理法与风味信息，告别繁琐录入。</li>
-    <li style="margin-bottom: 0.3rem;"><strong>风味复盘</strong>：记录手冲参数与个人评分（0-5星），建立专属的味觉数据库。</li>
-    <li style="margin-bottom: 0.3rem;"><strong>便捷管理</strong>：支持多维度筛选与搜索，快速找回你的“心头好”。</li>
-</ul>
+        "coffee": `<p>豆藏（Project Coffee）是一款专为咖啡爱好者打造的个人咖啡豆管理应用，旨在解决“喝过即忘”的痛点。它能帮你将买过、喝过、喜欢过的豆子集中存档，随时回溯口味与评分。</p>
 
-<strong>技术栈</strong><br>
-React 19 + Node.js + PostgreSQL。接入 Qwen-VL 大模型实现图像识别，Railway 全栈部署。`
+<p><strong>核心体验</strong><br>
+拍照上传豆卡或包装，AI自动提取产地、处理法与风味信息，告别繁琐录入。记录手冲参数与个人评分（0-5星），建立专属的味觉数据库。支持多维度筛选与搜索，快速找回你的“心头好”。</p>
+
+<p><strong>技术栈</strong><br>
+React 19 + Node.js + PostgreSQL。接入 Qwen-VL 大模型实现图像识别，Railway 全栈部署。</p>`
     };
 
     const modal = document.getElementById('project-modal');

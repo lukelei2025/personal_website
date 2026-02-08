@@ -654,8 +654,8 @@ h3 {
 
 .modal-image-wrapper {
     width: 100%;
-    height: 300px;
-    /* Reduced from 400px */
+    height: 250px;
+    /* Fixed height for top banner feel */
     overflow: hidden;
     background: #f0f0f0;
 }
@@ -728,6 +728,12 @@ h3 {
 }
 
 @media (min-width: 768px) {
+    .modal-content {
+        max-width: 900px;
+        /* Slightly wider for split layout */
+        margin: auto;
+    }
+
     .modal-body {
         flex-direction: row;
         align-items: stretch;
@@ -737,10 +743,9 @@ h3 {
     .modal-image-wrapper {
         width: 50%;
         height: auto;
-        min-height: 250px;
-        /* Ensure minimal height */
+        min-height: 350px;
+        /* Taller for split layout */
         position: relative;
-        /* For absolute img */
     }
 
     .modal-image-wrapper img {
@@ -754,9 +759,7 @@ h3 {
     .modal-text {
         width: 50%;
         text-align: left;
-        /* create text concentration at top */
         padding-top: 2rem;
         display: block;
-        /* ensure no flex centering */
     }
 }
