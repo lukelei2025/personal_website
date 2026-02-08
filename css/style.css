@@ -716,8 +716,8 @@ h3 {
 
 @media (min-width: 768px) {
     .modal-content {
-        max-width: 900px;
-        /* Slightly wider for split layout */
+        max-width: 650px;
+        /* Reduced to ~70% of 900px */
         margin: auto;
     }
 
