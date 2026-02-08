@@ -70,13 +70,23 @@ h3 {
 /* #projects (Vibe Coding) - Pixel Style */
 #projects {
     background-color: #ffffff;
-    background-image: linear-gradient(#f0f0f0 1px, transparent 1px),
-        linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
-    background-size: 30px 30px;
-    background-position: center top;
+    /* Canvas (js/snake-bg.js) provides the background */
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+/* Ensure content sits above background but allows clicks through */
+#projects .container {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Re-enable pointer events for actual content elements */
+#projects .container>* {
+    pointer-events: auto;
 }
 
 /* #creations (AI Video) - Artistic Style */
