@@ -111,17 +111,26 @@ class Bubble {
     }
 
     draw(ctx) {
-        // Bubble Body (Transparent Glass)
+        // Bubble Body (Transparent Glass with slight tint for visibility)
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'; // Very faint fill
+
+        // Shadow for depth and visibility on white background
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(0, 122, 255, 0.15)'; // Soft blue glow
+
+        ctx.fillStyle = 'rgba(200, 230, 255, 0.08)'; // Very faint blue fill
         ctx.fill();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'; // Thin white rim
+
+        // Reset shadow for stroke
+        ctx.shadowBlur = 0;
+
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)'; // Faint gray rim for definition
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
         // Main Reflection (Top Left) - "Light" effect
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; // Bright white highlight
         ctx.beginPath();
         // Elliptical reflection for realism
         ctx.ellipse(
@@ -135,8 +144,8 @@ class Bubble {
         );
         ctx.fill();
 
-        // Secondary Reflection (Bottom Right) - Subtle
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        // Secondary Reflection (Bottom Right)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
         ctx.beginPath();
         ctx.arc(
             this.x + this.radius * 0.4,
