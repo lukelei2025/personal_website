@@ -13,6 +13,16 @@ class BubbleBackground {
 
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
+        // Ensure canvas is positioned absolutely behind content
+        this.canvas.style.position = 'absolute';
+        this.canvas.style.top = '0';
+        this.canvas.style.left = '0';
+        this.canvas.style.width = '100%';
+        this.canvas.style.height = '100%';
+        this.canvas.style.zIndex = '0';
+        // Allow canvas to receive mouse events for interaction
+        // Note: Content like links/buttons in .container (z-index: 2) will still be clickable
+        this.canvas.style.pointerEvents = 'auto';
         this.container.appendChild(this.canvas);
 
         this.bubbles = [];
