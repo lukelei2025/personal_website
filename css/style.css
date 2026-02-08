@@ -404,6 +404,13 @@ h3 {
     position: relative;
 }
 
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
 .placeholder-image {
     width: 100%;
     height: 100%;
@@ -413,6 +420,7 @@ h3 {
     transition: transform 0.5s ease;
 }
 
+.project-card:hover .card-image-wrapper img,
 .project-card:hover .placeholder-image {
     transform: scale(1.05);
 }
@@ -671,6 +679,9 @@ h3 {
     color: var(--text-secondary);
     margin-bottom: 2rem;
     line-height: 1.6;
+    white-space: pre-wrap;
+    text-align: left;
+    /* Better for long text */
 }
 
 /* Fun Button */
