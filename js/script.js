@@ -73,7 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // For placeholder, we use the gradient color if no image source is provided
             // If you implement real images later, use data-img attribute
             const imgColor = card.getAttribute('data-img-color');
-            const imgSrc = card.getAttribute('data-img-src'); // Future proofing
+            let imgSrc = card.getAttribute('data-modal-img'); // Prefer modal-specific image
+            if (!imgSrc) {
+                imgSrc = card.getAttribute('data-img-src'); // Fallback to card image
+            }
 
             // Populate Modal
             modalTitle.textContent = title;
