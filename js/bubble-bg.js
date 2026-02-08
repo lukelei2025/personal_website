@@ -47,8 +47,8 @@ class BubbleBackground {
 
     createBubbles() {
         this.bubbles = [];
-        // Adjust bubble count based on screen size
-        const count = window.innerWidth < 768 ? 8 : 15;
+        // Increase bubble count for density: 20 for mobile, 40 for desktop
+        const count = window.innerWidth < 768 ? 20 : 40;
 
         for (let i = 0; i < count; i++) {
             this.bubbles.push(new Bubble(this.canvas));
@@ -111,46 +111,75 @@ class Bubble {
     }
 
     draw(ctx) {
-        // Bubble Body (Transparent Glass with slight tint for visibility)
+        // 3D Bubble Body (Radial Gradient for curvature)
+        const gradient = ctx.createRadialGradient(
+            this.x - this.radius * 0.3,
+            this.y - this.radius * 0.3,
+            this.radius * 0.1,
+            this.x,
+            this.y,
+            this.radius
+        );
+
+        // Transparent center to thicker blueish edges
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 0.05)');
+        gradient.addColorStop(0.8, 'rgba(200, 230, 255, 0.1)');
+        gradient.addColorStop(1, 'rgba(0, 122, 255, 0.15)');
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
-        // Shadow for depth and visibility on white background
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = 'rgba(0, 122, 255, 0.15)'; // Soft blue glow
+        // Deep Shadow for 3D "pop" off the page
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = 'rgba(0, 80, 200, 0.15)';
 
-        ctx.fillStyle = 'rgba(200, 230, 255, 0.08)'; // Very faint blue fill
+        ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Reset shadow for stroke
+        // Reset shadow
         ctx.shadowBlur = 0;
 
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)'; // Faint gray rim for definition
-        ctx.lineWidth = 1.5;
+        // Rim Light (Bottom Right) - Adds definition to the dark side
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0.2 * Math.PI, 2.3 * Math.PI, true); // Partial arc
         ctx.stroke();
 
-        // Main Reflection (Top Left) - "Light" effect
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'; // Bright white highlight
+        // Main Specular Highlight (Top Left - Glossy)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
         ctx.beginPath();
-        // Elliptical reflection for realism
         ctx.ellipse(
-            this.x - this.radius * 0.4,
-            this.y - this.radius * 0.4,
-            this.radius * 0.2,
-            this.radius * 0.1,
+            this.x - this.radius * 0.45,
+            this.y - this.radius * 0.45,
+            this.radius * 0.25,
+            this.radius * 0.12,
             Math.PI / 4,
             0,
             Math.PI * 2
         );
         ctx.fill();
 
-        // Secondary Reflection (Bottom Right)
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        // Secondary Highlight (Small dot)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.beginPath();
+        ctx.arc(
+            this.x - this.radius * 0.55,
+            this.y - this.radius * 0.55,
+            this.radius * 0.04,
+            0,
+            Math.PI * 2,
+            false
+        );
+        ctx.fill();
+
+        // Bottom Reflection (Caustics simulation)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
         ctx.beginPath();
         ctx.arc(
             this.x + this.radius * 0.4,
             this.y + this.radius * 0.4,
-            this.radius * 0.05,
+            this.radius * 0.1,
             0,
             Math.PI * 2,
             false
