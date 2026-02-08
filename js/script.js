@@ -126,4 +126,35 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // --- WeChat Modal Logic ---
+    const wechatModal = document.getElementById('wechat-modal');
+    const wechatTrigger = document.getElementById('wechat-trigger');
+    const wechatClose = document.getElementById('wechat-close');
+
+    if (wechatTrigger && wechatModal && wechatClose) {
+        wechatTrigger.addEventListener('click', () => {
+            wechatModal.style.display = 'flex';
+            setTimeout(() => {
+                wechatModal.classList.add('show');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        });
+
+        const closeWeChat = () => {
+            wechatModal.classList.remove('show');
+            setTimeout(() => {
+                wechatModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        };
+
+        wechatClose.addEventListener('click', closeWeChat);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === wechatModal) {
+                closeWeChat();
+            }
+        });
+    }
 });

@@ -178,12 +178,12 @@
                         <img src="assets/images/xhs.png" alt="小红书"
                             style="height: 24px; width: auto; transition: all 0.3s;">
                     </a>
-                    <a href="assets/images/wechat_qr.jpg" class="social-link" title="微信" target="_blank">
+                    <div class="social-link" title="微信" style="cursor: pointer;" id="wechat-trigger">
                         <img src="assets/images/wechat_icon.png" alt="微信"
-                            style="height: 36px; width: auto; transition: all 0.3s;">
-                    </a>
+                            style="height: 32px; width: auto; transition: all 0.3s;">
+                    </div>
                     <a href="mailto:157035521@qq.com" class="social-link" title="Email">
-                        <span class="material-icons-round">email</span>
+                        <span class="material-icons-round" style="font-size: 31px;">email</span>
                     </a>
                 </div>
                 <div class="copyright">
@@ -209,6 +209,17 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- WeChat Modal -->
+    <div id="wechat-modal" class="modal">
+        <div class="modal-content glass-card"
+            style="max-width: 360px; text-align: center; padding: 30px; position: relative;">
+            <span class="close-btn" id="wechat-close">&times;</span>
+            <img src="assets/images/wechat_qr.jpg" alt="WeChat QR Code"
+                style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.9rem;">扫一扫加我微信</p>
         </div>
     </div>
 
