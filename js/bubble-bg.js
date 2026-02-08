@@ -47,11 +47,27 @@ class BubbleBackground {
 
     createBubbles() {
         this.bubbles = [];
-        // Increase bubble count for density: 20 for mobile, 40 for desktop
-        const count = window.innerWidth < 768 ? 20 : 40;
+        // Increase bubble count for density: 15 for mobile, 25 for desktop (reduced slightly to avoid overcrowding with collisions)
+        const targetCount = window.innerWidth < 768 ? 10 : 25;
+        let attempts = 0;
 
-        for (let i = 0; i < count; i++) {
-            this.bubbles.push(new Bubble(this.canvas));
+        while (this.bubbles.length < targetCount && attempts < 1000) {
+            const bubble = new Bubble(this.canvas);
+            let overlapping = false;
+
+            for (let i = 0; i < this.bubbles.length; i++) {
+                const other = this.bubbles[i];
+                const distance = Math.hypot(bubble.x - other.x, bubble.y - other.y);
+                if (distance < bubble.radius + other.radius) {
+                    overlapping = true;
+                    break;
+                }
+            }
+
+            if (!overlapping) {
+                this.bubbles.push(bubble);
+            }
+            attempts++;
         }
     }
 
@@ -89,12 +105,78 @@ class BubbleBackground {
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // Update and Draw Bubbles
         this.bubbles.forEach(bubble => {
             bubble.update(this.mouse, this.clickPulse);
             bubble.draw(this.ctx);
         });
 
+        // Check Collisions
+        for (let i = 0; i < this.bubbles.length; i++) {
+            for (let j = i + 1; j < this.bubbles.length; j++) {
+                const b1 = this.bubbles[i];
+                const b2 = this.bubbles[j];
+                const dist = Math.hypot(b1.x - b2.x, b1.y - b2.y);
+
+                if (dist < b1.radius + b2.radius) {
+                    this.resolveCollision(b1, b2);
+                    // Separate bubbles slightly to prevent sticking
+                    const overlap = (b1.radius + b2.radius - dist) / 2;
+                    const angle = Math.atan2(b2.y - b1.y, b2.x - b1.x);
+                    b1.x -= overlap * Math.cos(angle);
+                    b1.y -= overlap * Math.sin(angle);
+                    b2.x += overlap * Math.cos(angle);
+                    b2.y += overlap * Math.sin(angle);
+                }
+            }
+        }
+
         requestAnimationFrame(this.animate.bind(this));
+    }
+
+    rotate(velocity, angle) {
+        return {
+            x: velocity.x * Math.cos(angle) - velocity.y * Math.sin(angle),
+            y: velocity.x * Math.sin(angle) + velocity.y * Math.cos(angle)
+        };
+    }
+
+    resolveCollision(p1, p2) {
+        const xVelocityDiff = p1.dx - p2.dx;
+        const yVelocityDiff = p1.dy - p2.dy;
+
+        const xDist = p2.x - p1.x;
+        const yDist = p2.y - p1.y;
+
+        // Prevent accidental overlap of particles
+        if (xVelocityDiff * xDist + yVelocityDiff * yDist >= 0) {
+
+            // Grab angle between the two colliding particles
+            const angle = -Math.atan2(p2.y - p1.y, p2.x - p1.x);
+
+            // Store mass in var for better readability, collision equation
+            const m1 = p1.radius;
+            const m2 = p2.radius;
+
+            // Velocity before equation
+            const u1 = this.rotate({ x: p1.dx, y: p1.dy }, angle);
+            const u2 = this.rotate({ x: p2.dx, y: p2.dy }, angle);
+
+            // Velocity after 1d collision equation
+            const v1 = { x: u1.x * (m1 - m2) / (m1 + m2) + u2.x * 2 * m2 / (m1 + m2), y: u1.y };
+            const v2 = { x: u2.x * (m1 - m2) / (m1 + m2) + u1.x * 2 * m1 / (m1 + m2), y: u2.y };
+
+            // Final velocity after rotating axis back to original location
+            const vFinal1 = this.rotate(v1, -angle);
+            const vFinal2 = this.rotate(v2, -angle);
+
+            // Swap particle velocities for realistic bounce effect
+            p1.dx = vFinal1.x;
+            p1.dy = vFinal1.y;
+
+            p2.dx = vFinal2.x;
+            p2.dy = vFinal2.y;
+        }
     }
 }
 
