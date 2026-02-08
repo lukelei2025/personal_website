@@ -63,11 +63,11 @@ class SnakeBackground {
         const startX = Math.floor(this.tileCountX / 2);
         const startY = Math.floor(this.tileCountY / 2);
 
-        this.snake = [
-            { x: startX, y: startY },
-            { x: startX - 1, y: startY },
-            { x: startX - 2, y: startY }
-        ];
+        // Start with length 10
+        this.snake = [];
+        for (let i = 0; i < 10; i++) {
+            this.snake.push({ x: startX - i, y: startY });
+        }
 
         this.dx = 1;
         this.dy = 0;
