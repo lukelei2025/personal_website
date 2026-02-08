@@ -36,15 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Project Modal Logic ---
     const projectDetails = {
-        "coffee": `豆藏（Project Coffee）是一款面向咖啡爱好者的个人咖啡豆管理应用：把「买过、喝过、喜欢过」的豆子集中存档，并且能随时找回当时的口味与评分。它解决的核心痛点很直接：豆子产地与处理法太多记不住；喜好是主观的，隔一段时间就忘；风味描述抽象难复盘；包装信息散落在相册；在哪里买、在哪喝也常对不上。
+        "coffee": `豆藏（Project Coffee）是一款专为咖啡爱好者打造的个人咖啡豆管理应用，旨在解决“喝过即忘”的痛点。它能帮你将买过、喝过、喜欢过的豆子集中存档，随时回溯口味与评分。
 
-典型使用场景是：在咖啡店喝到惊艳的一杯，拍下包装或豆卡，系统用 AI 识别并自动填入名称、产地、处理法、风味标签；回家后补上手冲参数与品鉴笔记，给出 0–5 分（支持半星）的评分。之后无论是复购、选豆、对比烘焙商，还是按关键词/星级筛选，都能快速定位到「我真正喜欢的那几款」。
+**核心体验**：
+*   **AI 智能识别**：拍照上传豆卡或包装，AI自动提取产地、处理法与风味信息，告别繁琐录入。
+*   **风味复盘**：记录手冲参数与个人评分（0-5星），建立专属的味觉数据库。
+*   **便捷管理**：支持多维度筛选与搜索，快速找回你的“心头好”。
 
-核心功能包括：手机号虚拟登录（免短信）、多用户数据隔离、JWT 保持登录与登出；咖啡豆的新增/列表/详情/编辑/删除（卡片左滑 iOS 风格删除）；风味标签输入管理与星级评分组件；拍照/相册上传识别与图片压缩。
-
-技术上采用 React 19 + TypeScript + Vite 6 + React Router v7，原生 CSS 与 Lucide 图标；后端为 Node.js 20 + Express 4，Prisma 5 连接 Railway 托管的 PostgreSQL，JWT（jsonwebtoken）鉴权；AI 识别接入阿里云 DashScope（Qwen-VL-Plus），整体以 Railway 一体化部署（前端静态资源 + 后端 API）。`
+**技术栈**：
+React 19 + Node.js + PostgreSQL。接入 Qwen-VL 大模型实现图像识别，Railway 全栈部署。`
     };
 
     const modal = document.getElementById('project-modal');
