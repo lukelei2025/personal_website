@@ -70,7 +70,13 @@ h3 {
 /* #projects (Vibe Coding) - Pixel Style */
 #projects {
     background-color: #ffffff;
-    /* Canvas (js/snake-bg.js) provides the background */
+    /* Static Grid Background */
+    background-image: linear-gradient(#f0f0f0 1px, transparent 1px),
+        linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center top;
+
+    /* Canvas (js/snake-bg.js) overlays this */
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     z-index: 1;

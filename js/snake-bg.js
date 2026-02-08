@@ -25,7 +25,7 @@ class SnakeBackground {
 
         this.container.appendChild(this.canvas);
 
-        this.gridSize = 25; // Pixel size
+        this.gridSize = 30; // Pixel size
         this.tileCountX = 0;
         this.tileCountY = 0;
 
@@ -201,25 +201,8 @@ class SnakeBackground {
         // Clear entire canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw Grid (Subtle)
-        this.ctx.fillStyle = '#f9f9f9'; // Very faint checks
-        /*
-        for (let x = 0; x < this.tileCountX; x++) {
-            for (let y = 0; y < this.tileCountY; y++) {
-                if ((x + y) % 2 === 0) {
-                   this.ctx.fillRect(x * this.gridSize, y * this.gridSize, this.gridSize, this.gridSize);
-                }
-            }
-        }
-        */
-        // Let's stick to just the snake for cleaner look, or maybe faint dots
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
-        for (let x = 0; x < this.tileCountX; x++) {
-            for (let y = 0; y < this.tileCountY; y++) {
-                this.ctx.fillRect(x * this.gridSize + 10, y * this.gridSize + 10, 2, 2);
-            }
-        }
-
+        // Grid is handled by CSS (style.css #projects background-image)
+        // We only draw elements on top
 
         // Draw Food
         this.ctx.fillStyle = '#ff3b30'; // Apple red
