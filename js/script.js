@@ -39,11 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectDetails = {
         "coffee": `<p>豆藏（Project Coffee）是一款专为咖啡爱好者打造的个人咖啡豆管理应用，旨在解决“喝过即忘”的痛点。它能帮你将买过、喝过、喜欢过的豆子集中存档，随时回溯口味与评分。</p>
 
-<p><strong>核心体验</strong><br>
-拍照上传豆卡或包装，AI自动提取产地、处理法与风味信息，告别繁琐录入。记录手冲参数与个人评分（0-5星），建立专属的味觉数据库。支持多维度筛选与搜索，快速找回你的“心头好”。</p>
+<p>在体验上，你只需拍照上传豆卡或包装，AI 即可自动提取产地、处理法与风味信息，告别繁琐录入。系统支持记录手冲参数与个人评分（0-5星），帮你建立专属的味觉数据库，并提供多维度筛选与搜索，快速找回你的“心头好”。</p>
 
-<p><strong>技术栈</strong><br>
-React 19 + Node.js + PostgreSQL。接入 Qwen-VL 大模型实现图像识别，Railway 全栈部署。</p>`
+<p>该项目基于 React 19、Node.js 与 PostgreSQL 开发，接入 Qwen-VL 大模型实现图像识别，并采用 Railway 进行全栈部署。</p>`
     };
 
     const modal = document.getElementById('project-modal');
