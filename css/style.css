@@ -664,6 +664,7 @@ h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
 }
 
 .modal-text {
@@ -729,19 +730,33 @@ h3 {
 @media (min-width: 768px) {
     .modal-body {
         flex-direction: row;
+        align-items: stretch;
+        /* Ensure equal height columns */
     }
 
     .modal-image-wrapper {
         width: 50%;
         height: auto;
+        min-height: 250px;
+        /* Ensure minimal height */
+        position: relative;
+        /* For absolute img */
+    }
+
+    .modal-image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
     }
 
     .modal-text {
         width: 50%;
         text-align: left;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
+        /* create text concentration at top */
+        padding-top: 2rem;
+        display: block;
+        /* ensure no flex centering */
     }
 }
