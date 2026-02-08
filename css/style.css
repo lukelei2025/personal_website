@@ -681,14 +681,25 @@ h3 {
 
 .modal-text p {
     font-size: 0.95rem;
-    /* Reduced from 1.1rem */
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    /* Reduced from 2rem */
+    margin-bottom: 0.8rem;
+    /* Reduced from 1.5rem */
     line-height: 1.6;
     white-space: pre-wrap;
     text-align: left;
-    /* Better for long text */
+}
+
+.modal-text ul {
+    text-align: left;
+    margin: 0.5rem 0 0.8rem 0;
+    padding-left: 1.2rem;
+}
+
+.modal-text li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.2rem;
+    line-height: 1.5;
 }
 
 /* Fun Button */
